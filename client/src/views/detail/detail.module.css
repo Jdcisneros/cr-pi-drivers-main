@@ -1,0 +1,51 @@
+.container{
+  display: flex;
+  background-color: #fff;
+  border-radius:  10px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgb(0, 0, 0, 0.1);
+}
+
+.image{
+    flex:1;
+    overflow: hidden;
+    border-bottom-left-radius: 10px;
+   border-top-left-radius: 10px;
+
+}
+.container img{
+   width: 100%;
+   height: auto;
+}
+   
+.cardDetail {
+flex:2;
+padding: 20px;
+}
+
+.cardDetail h2 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 24px;
+    color: #333;
+}
+.cardDetail p{
+    margin-bottom: 5px 0;
+    font-size: 16px;
+    color: #666;
+}
+.cardDetail ul{
+    padding-left: 20px;
+}
+
+.cardDetail ul li {
+    list-style: disc;
+}
+
+.cardDetail h3 {
+    margin-top: 15px;
+    margin-bottom: 5px;
+    font-size: 20px;
+    color: #333;
+}
+

@@ -1,0 +1,27 @@
+.containerLanding{
+    display:grid;
+    justify-content: center;
+    align-items: center;
+    justify-items: center;
+    
+}
+
+.logosize{
+    height: 150px;
+    margin: 100px;
+}
+
+.button{
+    background-color: #ff0404;
+    color: white;
+    border: none;
+    border-radius: 1px;
+    padding: 12px 20px;
+    font-size: 16px;
+    cursor: pointer;
+     width: 600px;
+}
+
+.button:hover {
+    background-color: #800000;
+}

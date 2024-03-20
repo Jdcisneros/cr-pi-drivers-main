@@ -3,9 +3,9 @@ import axios from "axios"
 export const GET_DRIVERS = "GET_DRIVERS"
 export const GET_BY_NAME = "GET_BY_NAME"
 export const CREATE_DRIVER = "CREATE_DRIVER"
-export const FILTER = "FILTER"
 export const ORDER_NAME = "ORDER_NAME" 
 export const ORDER_DOB = "ORDER_DOB"
+export const GET_TEAMS = "GET_TEAMS"
 
 export function getDrivers(){
     return async function(dispatch){
@@ -59,3 +59,17 @@ export function createDriver(driverData){
         })
     }
 
+    export const getTeams = () => {
+        return async function(dispatch) {
+            try {
+                const response = await axios.get("http://localhost:3001/teams");
+                const teamsData = response.data;
+                dispatch({
+                    type: GET_TEAMS,
+                    payload: teamsData
+                });
+            } catch (error) {
+                console.error("Error al obtener los equipos:", error);
+            }
+        }
+    }

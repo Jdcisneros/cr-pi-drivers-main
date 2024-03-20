@@ -1,7 +1,7 @@
 .navContainer{
     background-color: darkorange;
     display: flex;
-    width: 99vw;
+    width: 100%;
     justify-content: space-between;
     align-items: center;
     padding: 10px;

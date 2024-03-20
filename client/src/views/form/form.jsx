@@ -1,8 +1,10 @@
-import { useState } from 'react';
+import { useState, useEffect} from 'react';
 import { useDispatch } from 'react-redux';
 import { createDriver } from '../../redux/actions';
 import style from './form.module.css'
 import Navbar from '../../components/navbar/navbar';
+import validation from "./validation"
+
 
 const Form = () => {
   const dispatch = useDispatch();
@@ -16,6 +18,12 @@ const Form = () => {
     dob: "",
     teams: "",
   });
+
+  const [errors, setErrors] = useState({});
+
+  
+
+
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -43,6 +51,14 @@ const Form = () => {
     });
   };
 
+  useEffect(() => {
+    if(formData.forename !== '' || formData.surname !== '' || formData.description !== '' 
+    || formData.image !== '' || formData.nationality !== '' || formData.dob !== '' || formData.teams != []){
+    const driverValidated = validation(formData);
+    setErrors(driverValidated);
+    }
+}, [formData])
+
   return ( 
      <div>
     <Navbar/>
@@ -60,6 +76,7 @@ const Form = () => {
           onChange={handleChange}
           required
           />
+          {errors.forename && <p style ={{color : 'red'}} >{errors.forename}</p>}
         </label>
         <label >SURNAME:
         <input
@@ -70,6 +87,7 @@ const Form = () => {
           onChange={handleChange}
           required
         />
+        {errors.surname && <p style ={{color : 'red'}} >{errors.surname}</p>}
         </label>
         <label>NATIONALITY:
         <input
@@ -80,6 +98,7 @@ const Form = () => {
           onChange={handleChange}
           required
         />
+        {errors.nationality && <p style ={{color : 'red'}} >{errors.nationality}</p>}
         </label>
         <label>Imagen:
         <input
@@ -90,6 +109,7 @@ const Form = () => {
           onChange={handleChange}
           required
         />
+        {errors.image && <p style ={{color : 'red'}} >{errors.image}</p>}
         </label>
         <label>DATE OF BIRTH:
         <input
@@ -100,6 +120,7 @@ const Form = () => {
           onChange={handleChange}
           required
         />
+        {errors.dob && <p style ={{color : 'red'}} >{errors.dob}</p>}
         </label>
 
         <label >DESCRIPTION:
@@ -109,7 +130,8 @@ const Form = () => {
           value={formData.description}
           onChange={handleChange}
           required
-        ></input>
+        />
+        {errors.description && <p style ={{color : 'red'}} >{errors.description}</p>}
         </label >
 
         <label>TEAMS:
@@ -121,7 +143,9 @@ const Form = () => {
           onChange={handleChange}
           required
         />
+        {errors.teams && <p style ={{color : 'red'}} >{errors.teams}</p>}
         </label>
+      
         <button className={style.formButton} type="submit">Agregar Conductor</button>
       </form>
     </div>
@@ -131,78 +155,3 @@ const Form = () => {
 
 export default Form;
 
-//   return (
-//     <div>
-//       <h2>Formulario de Creación de Conductor</h2>
-//       <form onSubmit={handleSubmit}>
-//         <label>Nombre:
-//         <input
-//           type="text"
-//           name="forename"
-//           value={formData.forename}
-//           onChange={handleChange}
-//           required
-//         />
-//         </label>
-//         <label >Apellido:
-//         <input
-//           type="text"
-//           name="surname"
-//           value={formData.surname}
-//           onChange={handleChange}
-//           required
-//         />
-//         </label>
-//         <label>Nacionalidad:
-//         <input
-//           type="text"
-//           name="nationality"
-//           value={formData.nationality}
-//           onChange={handleChange}
-//           required
-//         />
-//         </label>
-//         <label>Imagen:
-//         <input
-//           type="text"
-//           name="image"
-//           value={formData.image}
-//           onChange={handleChange}
-//           required
-//         />
-//         </label>
-//         <label>Fecha de Nacimiento:
-//         <input
-//           type="date"
-//           name="dob"
-//           value={formData.dob}
-//           onChange={handleChange}
-//           required
-//         />
-//         </label>
-
-//         <label>Descripción:
-//         <textarea
-//           name="description"
-//           value={formData.description}
-//           onChange={handleChange}
-//           required
-//         ></textarea>
-//         </label>
-
-//         <label>Escuderías:
-//         <input
-//           type="text"
-//           name="teams"
-//           value={formData.teams}
-//           onChange={handleChange}
-//           required
-//         />
-//         </label>
-//         <button type="submit">Crear Conductor</button>
-//       </form>
-//     </div>
-//   );
-// };
-
-// export default Form;

@@ -9,6 +9,6 @@ router.get("/drivers/:id", getDetailDriver);
 
 router.post("/drivers", createDriver);
 
-router.get("/team", getTeams)
+router.get("/teams", getTeams)
 
 module.exports = router;

@@ -1,37 +1,37 @@
-const axios = require('axios')
-const {Teams} = require("../db")
-
-const apiURL = 'http://localhost:3001/drivers/'
-
+const axios = require("axios");
+const { Teams } = require("../db");
 
 const getAllTeams = async (req, res) => {
   try {
-    const DbVacio = (await Teams.count()) === 0;
-    
+    const dbTeams = await Teams.findAll();
+    if (dbTeams.length === 0) {
+      const driversApiRes = await axios.get(`http://localhost:5000/drivers`);
+      const driversApi = driversApiRes.data;
+      const teamsApi = driversApi.flatMap((driver) => {
+        if (driver.teams && typeof driver.teams === "string") {
+          return driver.teams.split(",").map((team) => team.trim());
+        } else {
+          return [];
+        }
+      });
 
-    if (isDbEmpty) {
-      const DbVacio = (await axios.get("http://localhost:3001/drivers")).data;
-      const teamsApi = drivers.map((driver) => driver.teams).join(',').split(',');
+      const teamsFromDb = await Promise.all(
+        teamsApi.map(async (teamName) => {
+          await Teams.findOrCreate({ where: { teams: teamName } });
+        })
+      );
 
-
-      const uniqueTeamNames = [...new Set(teamsApi)];
-     
-
-
-      const teamsToSave = uniqueTeamNames.map((teamName) => ({ teams: teamName }));
-      await Teams.bulkCreate(teamsToSave);
-    
+      const updatedDbTeams = await Teams.findAll();
+      return updatedDbTeams;
     }
 
-    const teamsFromDb = await Teams.findAll();
-
-    return res.json(teamsFromDb);
+    return dbTeams;
   } catch (error) {
-    console.error('Error en getTeams:', error.message);
-    return res.status(500).json({ error: 'Error al obtener equipos' });
+    console.error("Error en getTeams:", error.message);
+    return res;
   }
 };
 
 module.exports = {
-    getAllTeams,
+  getAllTeams,
 };

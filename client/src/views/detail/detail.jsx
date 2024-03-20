@@ -16,12 +16,18 @@ function Detail() {
   useEffect(()=>{
   axios(`http://localhost:3001/drivers/${params?.id}`).then(({data}) => {
 
-  console.log("Data del driver:", data);
     if(data?.name || data?.forename) {
       setDrivers(data);
     } else {
       alert('no existe ese driver')
     }
+
+    if (data?.dob) {
+      data.dob = data.dob.toString().split('',10)
+    }
+
+    
+
   })
   .catch(()=> {
       console.log('Se rompió')
@@ -36,7 +42,7 @@ function Detail() {
     
     <div className={style.container}>
        <div className={style.image}>
-            <img src={drivers?.image?.url || drivers?.image || "https://www.teleadhesivo.com/es/img/spc029-jpg/folder/products-listado-merchanthover/pegatinas-coches-motos-piloto-formula-1.jpg"
+            <img src={drivers?.image?.url || "https://www.teleadhesivo.com/es/img/spc029-jpg/folder/products-listado-merchanthover/pegatinas-coches-motos-piloto-formula-1.jpg"
             } alt={drivers?.name?.forename && drivers?.name?.surname}/>
             </div>
             <div className={style.cardDetail}>

@@ -4,12 +4,13 @@ import style from './navbar.module.css'
 import f1 from '../../../../F1.svg'
 import { Link } from 'react-router-dom'
 
-
-
-
-function Navbar({handleChange, handleSubmit}) {
+function Navbar({handleChange, handleSubmit, isHome}) {
   return (
     <div className={style.navContainer}>
+
+      {!isHome && (<Link to="/drivers">
+            <button className={style.searchButton}>ATRAS</button>
+         </Link>)}
        <Link to={`/drivers`}>
             <div className={style.logo}>
                  <img src={f1} className={style.logosize}/>

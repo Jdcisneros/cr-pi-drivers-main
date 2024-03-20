@@ -11,7 +11,7 @@ body {
   }
 
 .home {
-    display: flex;
+  display: flex;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
@@ -50,31 +50,22 @@ body {
 
 
  .select {
-  margin: 3px;
-  padding: 12px 20px;
+  display: grid;
   background-color: #ff0404;
   color: #fff;
   border: none;
   cursor: pointer;
   border-radius: 1px;
   font-size: 16px;
+  padding-left:px;
 }
 
 .select:hover {
   background-color: #800000;
 }
 
-
-.searchButton {
-  background-color: #ff0404;
-  color: white;
-  border: none;
-  border-radius: 1px;
-  padding: 12px 20px;
-  font-size: 16px;
-  cursor: pointer;
-   }
-
-.searchButton:hover {
-   background-color: #800000;
+.order {
+  display: fl
+  
+ 
 }
